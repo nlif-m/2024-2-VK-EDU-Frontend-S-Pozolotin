@@ -18,13 +18,17 @@ correctSentence("Greetings, friends.") == "Greetings, friends."
  */
 
 export default function correctSentence(text) {
-
+  text = text.trim()
   if (typeof text !== "string" && text === null && text.length === 0){
     return false
+  }
+
+  if (text === ""){
+    return ""
   }
   
   const res = text[0].toUpperCase() + text.split("").slice(1, text.length).join("") + ((text[text.length-1]) === "." ? "" : ".") ;
   return res
 }
 
-console.log(correctSentence("Greetings, friends"));
+console.log(correctSentence(" "));

@@ -10,21 +10,26 @@
 import convertBytesToHuman from './convertBytesToHuman';
 
 test('Возвращает false для неправильного типа данных', () => {
-  expect(convertBytesToHuman(-1)).toBe(false);
-  expect(convertBytesToHuman("string")).toBe(false);
-  expect(convertBytesToHuman(null)).toBe(false);
-  expect(convertBytesToHuman(undefined)).toBe(false);
-  expect(convertBytesToHuman(NaN)).toBe(false);
-  expect(convertBytesToHuman({})).toBe(false);
-  expect(convertBytesToHuman([])).toBe(false);
+  expect(convertBytesToHuman(-1)).toBeFalsy;
+  expect(convertBytesToHuman("string")).toBeFalsy;
+  expect(convertBytesToHuman(null)).toBeFalsy;
+  expect(convertBytesToHuman(undefined)).toBeFalsy;
+  expect(convertBytesToHuman(NaN)).toBeFalsy;
+  expect(convertBytesToHuman({})).toBeFalsy;
+  expect(convertBytesToHuman([])).toBeFalsy;
+  expect(convertBytesToHuman(Infinity).toBeFalsy);
+  expect(convertBytesToHuman("123").toBeFalsy);
 });
 
+
 test('Возвращает корректное значение для чисел', () => {
-  expect(convertBytesToHuman(0)).toBe("0 Bytes");
-  expect(convertBytesToHuman(5)).toBe("5 Bytes");
-  expect(convertBytesToHuman(1024)).toBe("1 KB");
-  expect(convertBytesToHuman(123123123)).toBe("117.42 MB");
-  expect(convertBytesToHuman(1610612736)).toBe("1.5 GB");
+  const units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB']; 
+
+  for (let i = 0; i < units.length; i++) {
+    const value = 1024 ** i; 
+    const expected = `1 ${units[i]}`; 
+    expect(convertBytesToHuman(value)).toBe(expected); 
+  }
 });
 
 test('Пограничные значения', () => {

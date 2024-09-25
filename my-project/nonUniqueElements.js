@@ -30,10 +30,14 @@ export default function nonUniqueElements(data) {
   // Подсчитываю количество вхождений каждого элемента
   // Использу тернарное выражение для проверки наличия ключа
   data.forEach(item => {
-    map.set(item, (map.get(item) || 0) + 1);
+    if(map.has(item)) { 
+      map.set(item, true)
+    } else {
+      map.set(item, false)
+    }
   });
 
-  return data.filter(item => map.get(item) > 1);
+  return data.filter(item => map.get(item) === true);
 }
 
-console.log(nonUniqueElements([5, 5, 5, 5, 5]));
+console.log(nonUniqueElements([10, 9, 10, 10, 9, 8]));
