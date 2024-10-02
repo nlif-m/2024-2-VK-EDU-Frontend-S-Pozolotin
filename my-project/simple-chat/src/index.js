@@ -104,3 +104,5 @@ function addMessageToDOM(message) {
     // Прокрутка вниз для отображения последнего сообщения
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
+// Проверка деплоя
